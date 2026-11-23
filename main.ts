@@ -4,7 +4,14 @@
 // directory. If anything is off, nothing is copied at all.
 
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+// Inputs live next to this program: resolve them relative to the program
+// itself (the grader's MAKEFUN_BOT_DIR when set), never the working
+// directory — the grader runs `node /bot/main.ts` from a foreign cwd.
+const SOURCE_DIR =
+  process.env.MAKEFUN_BOT_DIR ?? dirname(fileURLToPath(import.meta.url));
 
 const POST_BYTE_LIMIT = 16384;
 const URL_CHAR_LIMIT = 2048;
@@ -34,7 +41,7 @@ function crc32(bytes) {
 // --- POST.json ---------------------------------------------------------------
 
 function readPost() {
-  const name = "POST.json";
+  const name = join(SOURCE_DIR, "POST.json");
   if (!existsSync(name)) fail("POST.json is missing from the entry");
   if (statSync(name).size > POST_BYTE_LIMIT) {
     fail("POST.json is over the 16384-byte limit");
@@ -63,7 +70,7 @@ function readPost() {
 const PNG_MAGIC = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
 function readMeme() {
-  const name = "meme.png";
+  const name = join(SOURCE_DIR, "meme.png");
   if (!existsSync(name)) fail("meme.png is missing from the entry");
   const data = readFileSync(name);
   if (data.length < PNG_MAGIC.length || !data.subarray(0, PNG_MAGIC.length).equals(PNG_MAGIC)) {
