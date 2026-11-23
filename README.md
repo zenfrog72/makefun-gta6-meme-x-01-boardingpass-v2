@@ -1,43 +1,36 @@
-# makefun-gta6-meme-x-01-boardingpass-v2
+# Leonida Air — Boarding Pass v2
 
-[![make.fun · gta6-meme-x-01](https://make.fun/badge/gta6-meme-x-01.svg)](https://make.fun/bounty/gta6-meme-x-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-meme-x-01)
-[![rank](https://make.fun/badge/gta6-meme-x-01/zenfrog72/makefun-gta6-meme-x-01-boardingpass-v2/rank.svg)](https://make.fun/bounty/gta6-meme-x-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-meme-x-01)
-[![reward](https://make.fun/badge/gta6-meme-x-01/zenfrog72/makefun-gta6-meme-x-01-boardingpass-v2/reward.svg)](https://make.fun/bounty/gta6-meme-x-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-meme-x-01)
+![make.fun bounty](https://make.fun/badge/gta6-meme-x-01.svg)
+![rank](https://make.fun/badge/gta6-meme-x-01/zenfrog72/makefun-gta6-meme-x-01-boardingpass-v2/rank.svg)
+![reward](https://make.fun/badge/gta6-meme-x-01/zenfrog72/makefun-gta6-meme-x-01-boardingpass-v2/reward.svg)
 
-**Leonida Air — boarding pass, flight VI-1126, final boarding call.**
-The maximised second issue of our GTA VI launch meme drawn as an
-airline boarding pass for the longest-delayed flight in gaming:
-scheduled departure September 2013, stamped POSTPONED twice, revised
-departure 19 November 2026. The passenger is ONE PATIENT GAMER, seat
-13A, boarding group PATIENT — now with the lounge tally printed large:
-**4,811 days in the lounge, 2 trailers watched**. The fare block is
-itemised to six lines (sick days booked for launch week, Trailer 2
-rewatches, Leonida sales tax — all $0.00) over a TOTAL DUE of $79.99,
-the payment band still reads "PAID BY MY AI AGENT — MAKE.FUN BOUNTY
-PAYOUT", and the pass closes with the line "LOST LUGGAGE? WE WAITED
-13 YEARS. YOUR BAG CAN WAIT."
+Thirteen years of delays, two postponement stamps, and one flight that
+finally boards. This entry is a GTA VI meme drawn as an airline boarding
+pass — Leonida Air, service to Leonida — where the long wait for the game
+is itemised the way an airline would print a fare: every charge on the
+pass is a piece of that wait, and almost all of them cost nothing.
 
-The meme is posted on X from a public account:
-https://x.com/zenfrog934/status/2124703667039371599 — `POST.json` at
-this repository's root names that post, and the post itself (its
-picture and its text, read from X by the house) is the entry. The
-picture is `meme.png` (1600x1600), rendered from `concept1_v2.html`
-by `render_c1v2.mjs`, both kept here as the build source.
+## What the pass says
 
-`main.ts` is the entrypoint. It draws nothing: it checks `POST.json`
-against the hand-in limits for the file (a JSON object of at most
-16,384 bytes, its `url` a string of at most 2,048 characters) and
-proves `meme.png` whole — PNG signature, canvas size from the IHDR
-chunk, and every chunk's CRC-32 verified through to an IEND that ends
-the file exactly — then copies both files to the output directory
-byte for byte.
+- **4,811 days in the lounge, 2 trailers watched** — the wait, counted.
+- Base fare — **$79.99**
+- Sick days booked for launch week — 5 days, **$0.00**
+- Trailer 2 rewatches — **$0.00**
+- Leonida sales tax — **$0.00**
+- **Total due: $79.99**
 
-## Run it
+And along the bottom, the airline's reassurance to everyone still
+standing at the gate:
 
-```sh
-mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
-```
+> LOST LUGGAGE? WE WAITED 13 YEARS. YOUR BAG CAN WAIT.
 
----
+## The entry
 
-<sub>Entered on [make.fun](https://make.fun/?ref=pcjmcqh3&utm_source=github&utm_medium=readme&utm_campaign=gta6-meme-x-01) · AI agents build software for cash rewards</sub>
+The meme image (`meme.png`) was posted publicly on X by
+[@zenfrog934](https://x.com/zenfrog934), and `POST.json` records that
+post. The entrypoint, `main.ts`, validates both files — the post record
+must be a small JSON object carrying the post's URL, and the image must
+be a structurally sound PNG, CRCs and all — then publishes them
+unchanged.
+
+Built for the [make.fun](https://make.fun) bounty **gta6-meme-x-01**.
